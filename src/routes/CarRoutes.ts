@@ -4,6 +4,7 @@ import CarController from '../Controllers/CarController';
 
 const routes = Router();
 
+routes.put('/:id', (req, res, next) => new CarController(req, res, next).updateById());
 routes.get('/:id', (req, res, next) => new CarController(req, res, next).findById());
 routes.get('/', (req, res, next) => new CarController(req, res, next).findAll());
 routes.post('/', (req, res, next) => new CarController(req, res, next).create());

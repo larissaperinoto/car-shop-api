@@ -30,4 +30,12 @@ export default class CarModel {
   public async findById(id: string): Promise<ICar | null> {
     return this.model.findOne({ _id: new ObjectId(id) });
   }
+
+  public async updateById(id: string, car:ICar) {
+    const { year, color, status, buyValue, doorsQty, seatsQty } = car;
+    return this.model.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { model: car.model, year, color, status, buyValue, doorsQty, seatsQty } },
+    );
+  }
 }
