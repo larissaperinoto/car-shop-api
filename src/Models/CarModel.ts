@@ -1,7 +1,7 @@
 import { Model, Schema, model, models } from 'mongoose';
 import ICar from '../Interfaces/ICar';
 
-class CarModel {
+export default class CarModel {
   private schema: Schema;
   private model: Model<ICar>;
 
@@ -10,7 +10,7 @@ class CarModel {
       model: { type: String, required: true },
       year: { type: Number, required: true },
       color: { type: String, required: true },
-      status: { type: Boolean, required: true },
+      status: { type: Boolean, required: false, default: false },
       buyValue: { type: Number, required: true },
       doorsQty: { type: Number, required: true },
       seatsQty: { type: Number, required: true },
@@ -22,5 +22,3 @@ class CarModel {
     return this.model.create({ ...car });
   }
 }
-
-export default CarModel;
