@@ -13,6 +13,5 @@ export default class MotorcycleService {
   public async create(motorcycle: IMotorcycle) {
     const newMotorcycle = await this.model.create(motorcycle);
     return this.createMotorcycleDomain(newMotorcycle);
-    return motorcycle;
   }
 }
