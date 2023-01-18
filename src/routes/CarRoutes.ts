@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { Router } from 'express';
 import CarController from '../Controllers/CarController';
 
