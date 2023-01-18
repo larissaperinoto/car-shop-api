@@ -27,4 +27,11 @@ export default class MotorcycleModel extends AbstractModel<IMotorcycle> {
   public async findById(id: string): Promise<IMotorcycle | null> {
     return this.model.findOne({ _id: new ObjectId(id) });
   }
+
+  public async updateById(id: string, motorcycle:IMotorcycle) {
+    return this.model.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { ...motorcycle } },
+    );
+  }
 }

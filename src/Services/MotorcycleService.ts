@@ -30,4 +30,14 @@ export default class MotorcycleService {
     }
     return { status: 200, response: this.createMotorcycleDomain(motorcycle) };
   }
+
+  public async updateById(id: string, car: IMotorcycle) {
+    if (!isValidObjectId(id)) return { status: 422, response: { message: 'Invalid mongo id' } };
+    const motorcycleExists = await this.model.findById(id);
+    if (motorcycleExists === null) {
+      return { status: 404, response: { message: 'Motorcycle not found' } };
+    }
+    await this.model.updateById(id, car);
+    return { status: 200, response: this.createMotorcycleDomain({ id, ...car }) };
+  }
 }
