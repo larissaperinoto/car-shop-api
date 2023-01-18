@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import Motorcycle from '../Domains/Motorcycle';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import MotorcycleModel from '../Models/MotorcycleModel';
@@ -19,5 +20,14 @@ export default class MotorcycleService {
     const cars = await this.model.findAll();
     const result = cars.map((motorcycle) => this.createMotorcycleDomain(motorcycle));
     return result;
+  }
+
+  public async findById(id: string) {
+    if (!isValidObjectId(id)) return { status: 422, response: { message: 'Invalid mongo id' } };
+    const motorcycle = await this.model.findById(id);
+    if (motorcycle === null) {
+      return { status: 404, response: { message: 'Motorcycle not found' } };
+    }
+    return { status: 200, response: this.createMotorcycleDomain(motorcycle) };
   }
 }

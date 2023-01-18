@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { ObjectId } from 'mongodb';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import AbstractModel from './AbstractODM';
 
@@ -21,5 +22,9 @@ export default class MotorcycleModel extends AbstractModel<IMotorcycle> {
 
   public async findAll(): Promise<IMotorcycle[]> {
     return this.model.find();
+  }
+
+  public async findById(id: string): Promise<IMotorcycle | null> {
+    return this.model.findOne({ _id: new ObjectId(id) });
   }
 }
