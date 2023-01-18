@@ -18,4 +18,8 @@ export default class MotorcycleModel extends AbstractModel<IMotorcycle> {
   public async create(motorcycle: IMotorcycle): Promise<IMotorcycle> {
     return this.model.create({ ...motorcycle });
   }
+
+  public async findAll(): Promise<IMotorcycle[]> {
+    return this.model.find();
+  }
 }
