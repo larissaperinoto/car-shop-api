@@ -1,10 +1,11 @@
-import { isValidObjectId } from 'mongoose';
 import Motorcycle from '../Domains/Motorcycle';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import MotorcycleModel from '../Models/MotorcycleModel';
+import ValidateObjectId from '../utils/ValidateObjectId';
 
 export default class MotorcycleService {
   private model = new MotorcycleModel();
+  private validateObjectId = new ValidateObjectId();
 
   private createMotorcycleDomain(motorcycle: IMotorcycle) {
     if (motorcycle) return new Motorcycle(motorcycle);
@@ -23,7 +24,7 @@ export default class MotorcycleService {
   }
 
   public async findById(id: string) {
-    if (!isValidObjectId(id)) return { status: 422, response: { message: 'Invalid mongo id' } };
+    this.validateObjectId.validate(id);
     const motorcycle = await this.model.findById(id);
     if (motorcycle === null) {
       return { status: 404, response: { message: 'Motorcycle not found' } };
@@ -32,7 +33,7 @@ export default class MotorcycleService {
   }
 
   public async updateById(id: string, car: IMotorcycle) {
-    if (!isValidObjectId(id)) return { status: 422, response: { message: 'Invalid mongo id' } };
+    this.validateObjectId.validate(id);
     const motorcycleExists = await this.model.findById(id);
     if (motorcycleExists === null) {
       return { status: 404, response: { message: 'Motorcycle not found' } };

@@ -48,11 +48,12 @@ describe('Testa a camada service para a rota /cars', function () {
 
   it('Testa o método GET com a função "findById" quando o id não é válido', async function () {
     const service = new CarService();
-    const result = await service.findById('q1');
 
-    const message = { message: 'Invalid mongo id' };
-
-    expect(result).to.be.deep.equal({ status: 422, response: message });
+    try {
+      await service.findById('q1');
+    } catch (error) {
+      expect((error as Error).message).to.be.deep.equal('Invalid mongo id');
+    }
   });
 
   it('Testa o método GET com a função "findById" quando o carro não existe', async function () {
