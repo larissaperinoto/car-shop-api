@@ -26,19 +26,14 @@ export default class CarService {
   public async findById(id: string) {
     this.validateObjectId.validate(id);
     const car = await this.model.findById(id);
-    if (car === null) {
-      return { status: 404, response: { message: 'Car not found' } };
-    }
-    return { status: 200, response: this.createCarDomain(car) };
+    if (car === null) throw new Error('Car not found');
+    return this.createCarDomain(car);
   }
 
   public async updateById(id: string, car: ICar) {
     this.validateObjectId.validate(id);
-    const carExists = await this.model.findById(id);
-    if (carExists === null) {
-      return { status: 404, response: { message: 'Car not found' } };
-    }
+    await this.findById(id);
     await this.model.updateById(id, car);
-    return { status: 200, response: this.createCarDomain({ id, ...car }) };
+    return this.createCarDomain({ id, ...car });
   }
 }

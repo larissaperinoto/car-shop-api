@@ -38,8 +38,8 @@ export default class CarController {
   public async findById() {
     const { id } = this.req.params;
     try {
-      const { status, response } = await this.service.findById(id);
-      return this.res.status(status).json(response);
+      const car = await this.service.findById(id);
+      return this.res.status(200).json(car);
     } catch (error) {
       this.next(error);
     }
@@ -49,8 +49,8 @@ export default class CarController {
     const { id } = this.req.params;
     const car = this.req.body;
     try {
-      const { status, response } = await this.service.updateById(id, car);
-      return this.res.status(status).json(response);
+      const carUpdated = await this.service.updateById(id, car);
+      return this.res.status(200).json(carUpdated);
     } catch (error) {
       this.next(error);
     }

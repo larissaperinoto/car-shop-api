@@ -37,8 +37,8 @@ export default class MotorcycleController {
   public async findById() {
     const { id } = this.req.params;
     try {
-      const { status, response } = await this.service.findById(id);
-      return this.res.status(status).json(response);
+      const motorcycle = await this.service.findById(id);
+      return this.res.status(200).json(motorcycle);
     } catch (error) {
       this.next(error);
     }
@@ -48,8 +48,8 @@ export default class MotorcycleController {
     const { id } = this.req.params;
     const motorcycle = this.req.body;
     try {
-      const { status, response } = await this.service.updateById(id, motorcycle);
-      return this.res.status(status).json(response);
+      const motorcycleUpdated = await this.service.updateById(id, motorcycle);
+      return this.res.status(200).json(motorcycleUpdated);
     } catch (error) {
       this.next(error);
     }

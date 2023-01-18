@@ -18,27 +18,22 @@ export default class MotorcycleService {
   }
 
   public async findAll() {
-    const cars = await this.model.findAll();
-    const result = cars.map((motorcycle) => this.createMotorcycleDomain(motorcycle));
+    const motorcycles = await this.model.findAll();
+    const result = motorcycles.map((motorcycle) => this.createMotorcycleDomain(motorcycle));
     return result;
   }
 
   public async findById(id: string) {
     this.validateObjectId.validate(id);
     const motorcycle = await this.model.findById(id);
-    if (motorcycle === null) {
-      return { status: 404, response: { message: 'Motorcycle not found' } };
-    }
-    return { status: 200, response: this.createMotorcycleDomain(motorcycle) };
+    if (motorcycle === null) throw new Error('Motorcycle not found');
+    return this.createMotorcycleDomain(motorcycle);
   }
 
   public async updateById(id: string, car: IMotorcycle) {
     this.validateObjectId.validate(id);
-    const motorcycleExists = await this.model.findById(id);
-    if (motorcycleExists === null) {
-      return { status: 404, response: { message: 'Motorcycle not found' } };
-    }
+    await this.findById(id);
     await this.model.updateById(id, car);
-    return { status: 200, response: this.createMotorcycleDomain({ id, ...car }) };
+    return this.createMotorcycleDomain({ id, ...car });
   }
 }

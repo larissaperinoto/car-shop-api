@@ -41,7 +41,7 @@ describe('Testa a camada service para a rota /motorcycles', function () {
     const service = new MotorcycleService();
     const result = await service.findById(id);
 
-    expect(result).to.be.deep.equal({ status: 200, response: { id, ...motorcycleReq } });
+    expect(result).to.be.deep.equal({ id, ...motorcycleReq });
   });
 
   it('Testa o método GET com a função "updateById"', async function () {
@@ -50,6 +50,6 @@ describe('Testa a camada service para a rota /motorcycles', function () {
     const service = new MotorcycleService();
     const result = await service.updateById(id, motorcycleReq);
 
-    expect(result).to.be.deep.equal({ status: 200, response: { id, ...motorcycleReq } });
+    expect(result).to.be.deep.equal({ id, ...motorcycleReq });
   });
 });

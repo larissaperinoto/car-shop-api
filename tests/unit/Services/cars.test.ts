@@ -40,10 +40,7 @@ describe('Testa a camada service para a rota /cars', function () {
 
     const service = new CarService();
     const result = await service.findById(id);
-
-    const response = { id, ...carReq };
-
-    expect(result).to.be.deep.equal({ status: 200, response });
+    expect(result).to.be.deep.equal({ id, ...carReq });
   });
 
   it('Testa o método GET com a função "findById" quando o id não é válido', async function () {
@@ -60,11 +57,11 @@ describe('Testa a camada service para a rota /cars', function () {
     sinon.stub(Model, 'findOne').resolves(null);
 
     const service = new CarService();
-    const result = await service.findById(id);
-
-    const message = { message: 'Car not found' };
-
-    expect(result).to.be.deep.equal({ status: 404, response: message });
+    try {
+      await service.findById(id);
+    } catch (error) {
+      expect((error as Error).message).to.be.deep.equal('Car not found');
+    }
   });
 
   it('Testa o método PUT com a função "updateById" quando o carro existe', async function () {
@@ -74,7 +71,7 @@ describe('Testa a camada service para a rota /cars', function () {
     const service = new CarService();
     const result = await service.updateById(id, carReq);
 
-    expect(result).to.be.deep.equal({ status: 200, response: { id, ...carReq } });
+    expect(result).to.be.deep.equal({ id, ...carReq });
   });
 
   afterEach(function () {
