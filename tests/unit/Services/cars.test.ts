@@ -16,11 +16,12 @@ const carReq: ICar = {
 
 const id = '6348513f34c397abcad040b2';
 
+const service = new CarService();
+
 describe('Testa a camada service para a rota /cars', function () {
   it('Testa o método POST com a função "create"', async function () {
     sinon.stub(Model, 'create').resolves({ id, ...carReq });
 
-    const service = new CarService();
     const result = await service.create(carReq);
 
     expect(result).to.be.deep.equal({ id, ...carReq });
@@ -29,7 +30,6 @@ describe('Testa a camada service para a rota /cars', function () {
   it('Testa o método GET com a função "findAll"', async function () {
     sinon.stub(Model, 'find').resolves([{ id, ...carReq }]);
 
-    const service = new CarService();
     const result = await service.findAll();
 
     expect(result).to.be.deep.equal([{ id, ...carReq }]);
@@ -38,14 +38,11 @@ describe('Testa a camada service para a rota /cars', function () {
   it('Testa o método GET com a função "findById" quando o id existe', async function () {
     sinon.stub(Model, 'findOne').resolves({ id, ...carReq });
 
-    const service = new CarService();
     const result = await service.findById(id);
     expect(result).to.be.deep.equal({ id, ...carReq });
   });
 
   it('Testa o método GET com a função "findById" quando o id não é válido', async function () {
-    const service = new CarService();
-
     try {
       await service.findById('q1');
     } catch (error) {
@@ -56,7 +53,6 @@ describe('Testa a camada service para a rota /cars', function () {
   it('Testa o método GET com a função "findById" quando o carro não existe', async function () {
     sinon.stub(Model, 'findOne').resolves(null);
 
-    const service = new CarService();
     try {
       await service.findById(id);
     } catch (error) {
@@ -68,13 +64,21 @@ describe('Testa a camada service para a rota /cars', function () {
     sinon.stub(Model, 'findOne').resolves({ id, ...carReq });
     sinon.stub(Model, 'updateOne').resolves();
 
-    const service = new CarService();
     const result = await service.updateById(id, carReq);
 
     expect(result).to.be.deep.equal({ id, ...carReq });
   });
 
-  afterEach(function () {
+  it('Testa o método DELETE com a função "removeById" quando o carro existe', async function () {
+    sinon.stub(Model, 'findOne').resolves({ id, ...carReq });
+    sinon.stub(Model, 'deleteOne').resolves();
+
+    const result = await service.removeById(id);
+
+    expect(result).to.be.deep.equal(undefined);
+  });
+
+  beforeEach(function () {
     sinon.restore();
   });
 });
