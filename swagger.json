@@ -1,0 +1,355 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Car Shop API",
+    "description": "O Car Shop é uma API de gerenciamento para uma concessionária de veículos, onde é possível cadastar, atualizar, remover ou visualizar um veículo do banco de dados.",
+    "contact": {
+      "url": "https://larissaperinoto.com.br/",
+      "email": "perinotolarissa@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/cars": {
+      "post": {
+        "summary": "Cadastrar um novo carro",
+        "description": "Permite ao usuário cadastrar um novo carro no banco de dados.",
+        "tags": ["Cars"],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              },
+              "examples": {
+                "car": {
+                  "value": {
+                    "model": "Marea",
+                    "year": 2002,
+                    "color": "Black",
+                    "status": true,
+                    "buyValue": 15.990,
+                    "doorsQty": 4,
+                    "seatsQty": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Car"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Busca por todos os carros cadastrados",
+        "description": "Retorna uma lista com todos os carros cadastrados no banco de dados",
+        "tags": ["Cars"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Car"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/:id" : {
+      "put": {
+        "summary": "Atualiza um carro através do id",
+        "description": "Permite ao usuário atualizar as informações de um carro que já está cadastrado no banco de dados",
+        "tags": ["Cars"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id do carro que será atualizado",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              },
+              "examples": {
+                "car": {
+                  "value": {
+                    "model": "Marea",
+                    "year": 2002,
+                    "color": "Black",
+                    "status": true,
+                    "buyValue": 15.990,
+                    "doorsQty": 4,
+                    "seatsQty": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Car not found"
+          },
+          "422": {
+            "description": "Invalid mongo id"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove um carro do banco de dados",
+        "description": "Permite ao usuário remover um carro do banco de dados fornecendo seu id",
+        "tags": ["Cars"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id do carro que será deletado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Car not found"
+          },
+          "422": {
+            "description": "Invalid mongo id"
+          }
+        }
+      }
+    },
+    "/motorcycle": {
+      "post": {
+        "summary": "Cadastrar um nova moto",
+        "description": "Permite ao usuário cadastrar um nova moto no banco de dados.",
+        "tags": ["Motorcycles"],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorcycle"
+              },
+              "examples": {
+                "motorcycle": {
+                  "value": {
+                    "model": "Honda Cb 600f Hornet",
+                    "year": 2005,
+                    "color": "Yellow",
+                    "status": true,
+                    "buyValue": 30.000,
+                    "category": "Street",
+                    "engineCapacity": 600
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Motorcycle"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Busca por todos as motos cadastradas",
+        "description": "Retorna uma lista com todos as motos cadastradas no banco de dados",
+        "tags": ["Motorcycles"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Motorcycle"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/motorcycle:id" : {
+      "put": {
+        "summary": "Atualiza uma moto através do id",
+        "description": "Permite ao usuário atualizar as informações de uma moto que já está cadastrada no banco de dados",
+        "tags": ["Motorcycles"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id da moto que será atualizada",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorcycle"
+              },
+              "examples": {
+                "motorcycle": {
+                  "value": {
+                    "model": "Honda Cb 600f Hornet",
+                    "year": 2005,
+                    "color": "Yellow",
+                    "status": true,
+                    "buyValue": 30.000,
+                    "category": "Street",
+                    "engineCapacity": 600
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorcycle"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Motorcycle not found"
+          },
+          "422": {
+            "description": "Invalid mongo id"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove uma moto do banco de dados",
+        "description": "Permite ao usuário remover uma moto do banco de dados fornecendo seu id",
+        "tags": ["Motorcycles"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id da moto que será deletada",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Motorcycle not found"
+          },
+          "422": {
+            "description": "Invalid mongo id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Car": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "color": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "buyValue":{
+            "type": "number"
+          },
+          "doorsQty": {
+            "type":"number"
+          },
+          "seatsQty": {
+            "type": "number"
+          }
+        }
+      },
+      "Motorcycle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "color": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "buyValue":{
+            "type": "number"
+          },
+          "category": {
+            "type":"number"
+          },
+          "engineCapacity": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
