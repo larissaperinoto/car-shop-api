@@ -5,7 +5,7 @@ A [Trybe](https://www.betrybe.com/) é uma escola de tecnologia com foco em form
 
 ## Objetivo
 
-A aplicação desenvolvida é uma API de gerênciamento para uma concecionária de veículos, onde é possível cadastar, atualizar, remover ou visualizar um veículo do banco de dados.
+A aplicação desenvolvida é uma API de gerênciamento para uma concessionária de veículos, onde é possível cadastar, atualizar, remover ou visualizar um veículo do banco de dados.
 
 ## Tecnologias e Ferramentas
 
@@ -74,6 +74,11 @@ Inicie o servidor com o comando abaixo
 Rode os testes da aplicação usando o seguinte comando
 
     npm run test:mocha
+
+
+## Documentação da API
+
+Para acessar a documentação da API acesse no seu navegador o endereço localhost:3001/docs após seguir os passos de execução do projeto como descritos no tópico Execução.
 
 ---
 
