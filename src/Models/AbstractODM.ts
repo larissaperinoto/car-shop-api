@@ -30,4 +30,8 @@ export default abstract class AbstractModel<T> {
       { $set: { ...obj } },
     );
   }
+
+  public async removeById(id: string) {
+    await this.model.deleteOne({ _id: new ObjectId(id) });
+  }
 }

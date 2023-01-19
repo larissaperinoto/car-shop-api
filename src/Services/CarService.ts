@@ -36,4 +36,10 @@ export default class CarService {
     await this.model.updateById(id, car);
     return this.createCarDomain({ id, ...car });
   }
+
+  public async removeById(id: string) {
+    this.validateObjectId.validate(id);
+    await this.findById(id);
+    await this.model.removeById(id);
+  }
 }

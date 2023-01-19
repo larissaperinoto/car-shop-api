@@ -55,4 +55,14 @@ export default class CarController {
       this.next(error);
     }
   }
+
+  public async removeById() {
+    const { id } = this.req.params;
+    try {
+      await this.service.removeById(id);
+      return this.res.sendStatus(204);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
