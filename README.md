@@ -5,7 +5,7 @@ A [Trybe](https://www.betrybe.com/) é uma escola de tecnologia com foco em form
 
 ## Objetivo
 
-A aplicação desenvolvida é uma API de gerênciamento para uma concessionária de veículos, onde é possível cadastar, atualizar, remover ou visualizar um veículo do banco de dados.
+A aplicação desenvolvida é uma API de gerenciamento para uma concessionária de veículos, onde é possível cadastar, atualizar, remover ou visualizar um veículo do banco de dados.
 
 ## Tecnologias e Ferramentas
 
@@ -50,6 +50,7 @@ Na elaboração deste projeto utilizou-se as seguintes ferramentas:
 ## ⚙️ Execução
 
   ⚠️ Para executar o projeto é necessário ter o [Docker](https://docs.docker.com/desktop/install/linux-install/) instalado em sua máquina.
+  
 
 Para executar a aplicação inicie realizando o clone deste repositório com o comando abaixo.
 
@@ -79,6 +80,15 @@ Rode os testes da aplicação usando o seguinte comando
 ## Documentação da API
 
 Para acessar a documentação da API acesse no seu navegador o endereço localhost:3001/docs após seguir os passos de execução do projeto como descritos no tópico Execução.
+
+<details>
+<summary>saiba mais</summary>
+
+
+![Captura de tela de 2023-01-19 19-28-10](https://user-images.githubusercontent.com/98956659/213576865-5a18118c-cbf0-4eff-9f6c-e08c6a4e5aa2.png)
+
+
+</details>
 
 ---
 
