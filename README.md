@@ -49,7 +49,7 @@ Na elaboração deste projeto utilizou-se as seguintes ferramentas:
 
 ## ⚙️ Execução
 
-  ⚠️ Para executar o projeto é necessário ter o [Docker]([https://www.docker.com/](https://docs.docker.com/desktop/install/linux-install/) instalado em sua máquina.
+  ⚠️ Para executar o projeto é necessário ter o [Docker](https://docs.docker.com/desktop/install/linux-install/) instalado em sua máquina.
 
 Para executar a aplicação inicie realizando o clone deste repositório com o comando abaixo.
 
